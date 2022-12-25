@@ -44,7 +44,11 @@ function onDataReceived(text) {
   }
   else{
     unknownCommand(text);
+    console.log('\nplease enter "help" to see the list of valid commands:\n');
+    if(text === 'help\n'){
+      help();
   }
+}
 }
 
 
@@ -69,6 +73,18 @@ function hello(){
   console.log('hello!')
 }
 
+
+
+/**
+ * help
+ *  @param  {string}
+ */
+
+function help(){
+  console.log('\n--enter hello');
+  console.log('--enter quit or exit to stop the program\n');
+
+}
 
 /**
  * Exits the application
