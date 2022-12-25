@@ -76,14 +76,14 @@ function hello(){
 
 
 /**
- * help
- *  @param  {string}
+ * This function is for listing the valid command for user to use it if enter invalid one
+ * 
+ * @returns {void}
  */
 
 function help(){
   console.log('\n--enter hello');
   console.log('--enter quit or exit to stop the program\n');
-
 }
 
 /**
