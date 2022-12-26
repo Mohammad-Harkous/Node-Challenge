@@ -67,6 +67,7 @@ function unknownCommand(c){
 
 /**
  * Says hello
+ * This function for printing any string with "!", and if there any an empty string it will return a default value "hello!"
  * @param  {string}
  * @returns {void}
  */
