@@ -36,11 +36,12 @@ function startApp(name){
 function onDataReceived(text) {
   if (text === 'quit\n') {
     quit();
+
   }else if(text === 'exit\n'){
     quit();
-  }
-  else if(text === 'hello\n'){
-    hello();
+
+  }else if(text){
+    hello(text);
   }
   else{
     unknownCommand(text);
@@ -66,13 +67,19 @@ function unknownCommand(c){
 
 /**
  * Says hello
- *
+ * @param  {string}
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
-}
+function hello(text){
 
+  if(text.length > 1){
+    console.log(text.trim()+'!')
+  }
+  else{
+    console.log("hello!")
+    help()  
+  }
+}
 
 
 /**
@@ -82,8 +89,7 @@ function hello(){
  */
 
 function help(){
-  console.log('\n--enter hello');
-  console.log('--enter quit or exit to stop the program\n');
+  console.log('--enter "quit" or "exit" to stop the program\n');
 }
 
 /**
