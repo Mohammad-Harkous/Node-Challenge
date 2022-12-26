@@ -34,7 +34,10 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n') {
+  if(text === 'list\n'){
+    list()
+
+  }else if (text === 'quit\n') {
     quit();
 
   }else if(text === 'exit\n'){
@@ -42,6 +45,7 @@ function onDataReceived(text) {
 
   }else if(text){
     hello(text);
+
   }
   else{
     unknownCommand(text);
@@ -82,6 +86,10 @@ function hello(text){
   }
 }
 
+function list () {
+  console.log('1 - [] buy bread\n')
+  console.log('2 - [] finish the task')
+}
 
 /**
  * This function is for listing the valid command for user to use it if enter invalid one
@@ -105,3 +113,4 @@ function quit(){
 
 // The following line starts the application
 startApp("Mohammad Harkous")
+
