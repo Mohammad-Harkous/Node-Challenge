@@ -1,4 +1,4 @@
-
+const fs = require('fs');
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -34,7 +34,6 @@ function startApp(name){
  * @returns {void}
  */
 
-
 function onDataReceived(text) {
 
   if (text === 'list\n'){
@@ -46,14 +45,12 @@ function onDataReceived(text) {
   }else if(text === 'exit\n'){
     quit();
 
-  } else if(text === 'remove 1\n'){
+  } 
+  else if(text.startsWith('remove')){
     remove(text)
 
-  }else if(text === 'remove 2\n'){
-    remove(text)
-  }
-  else if(text === 'remove\n'){
-    removeLast()
+  }else if(text.startsWith('edit')){
+    edit(text)
   }
   else {
     add(text)
@@ -61,7 +58,6 @@ function onDataReceived(text) {
 
 
 }
-
 
 
 /**
@@ -114,26 +110,40 @@ function list () {
  */
 function remove(index){
   const res = index.slice(7)
-  tasks.splice(res -1,1)
+  if(res == -1){
+    tasks.pop()
+    if(tasks.length <=0){
+      console.log('no tasks left, you removed all the tasks')
+      }
+  }else{
+    tasks.splice(res -1,1)
 
   if(tasks.length <=0){
     console.log('no tasks left, you removed all the tasks')
     }
 
+  }
+  
   return tasks
 }
 
+
+
 /**
- * This function for removing the last task from stored tasks
+ * This function for editing a task from stored tasks
  * 
  * 
  */
-function removeLast(){
-  tasks.pop()
-  if(tasks.length <=0){
-  console.log('no tasks left, you removed all the tasks')
-  }
+function edit(index){
+
+  const item = index.slice(5)
+  const result = index.slice(7)
+  tasks.splice(item -1,1)
+  tasks.unshift(result)
+
+return tasks
 }
+
 
 
 /**
@@ -177,5 +187,6 @@ function quit(){
 
 // The following line starts the application
 startApp("Mohammad Harkous")
+
 
 
