@@ -45,18 +45,18 @@ function onDataReceived(text) {
   }else if(text === 'exit\n'){
     quit();
 
-  } 
-  else if(text.startsWith('remove')){
+  }else if(text.startsWith('remove')){
     remove(text)
 
   }else if(text.startsWith('edit')){
     edit(text)
+
+  }else if(text.startsWith('check')){
+    check(text)
   }
   else {
     add(text)
   }
-
-
 }
 
 
@@ -100,7 +100,6 @@ function list () {
   tasks.forEach((task, index) => {
     console.log((index+1) + ' - [ ] ' + task)
   });
-  
 }
 
 /**
@@ -116,14 +115,13 @@ function remove(index){
       console.log('no tasks left, you removed all the tasks')
       }
   }else{
+
     tasks.splice(res -1,1)
 
-  if(tasks.length <=0){
+    if(tasks.length <=0){
     console.log('no tasks left, you removed all the tasks')
     }
-
   }
-  
   return tasks
 }
 
@@ -137,9 +135,33 @@ function remove(index){
 function edit(index){
 
   const item = index.slice(5)
-  const result = index.slice(7)
+  const res = index.slice(7)
+  const t = index.substring(5,6)
   tasks.splice(item -1,1)
-  tasks.unshift(result)
+  tasks.unshift(res)
+
+  console.log(`task ${t} changed to ${res}`);
+
+return tasks
+}
+
+/**
+ * This function for check a task from stored tasks
+ * 
+ * 
+ */
+function check(index){
+
+  const item = index.slice(6)
+  const res = item - 1
+
+  if (isNaN(item) || item <= 0 || item >= tasks.length+1) {
+    console.log("Please enter a valid task number.");
+  }else{
+    
+    tasks[res] = `[✓] ${tasks[res]}`;
+    console.log(`task ${res + 1} is marked as checked`);
+  }
 
 return tasks
 }
