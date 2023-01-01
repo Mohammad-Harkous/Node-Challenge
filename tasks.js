@@ -46,7 +46,15 @@ function onDataReceived(text) {
   }else if(text === 'exit\n'){
     quit();
 
-  } 
+  } else if(text === 'remove 1\n'){
+    remove(text)
+
+  }else if(text === 'remove 2\n'){
+    remove(text)
+  }
+  else if(text === 'remove\n'){
+    removeLast()
+  }
   else {
     add(text)
   }
@@ -97,6 +105,34 @@ function list () {
     console.log((index+1) + ' - [ ] ' + task)
   });
   
+}
+
+/**
+ * This function for remove task from stored tasks
+ * 
+ * 
+ */
+function remove(index){
+  const res = index.slice(7)
+  tasks.splice(res -1,1)
+
+  if(tasks.length <=0){
+    console.log('no tasks left, you removed all the tasks')
+    }
+
+  return tasks
+}
+
+/**
+ * This function for removing the last task from stored tasks
+ * 
+ * 
+ */
+function removeLast(){
+  tasks.pop()
+  if(tasks.length <=0){
+  console.log('no tasks left, you removed all the tasks')
+  }
 }
 
 
