@@ -1,4 +1,4 @@
-const fs = require('fs');
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
