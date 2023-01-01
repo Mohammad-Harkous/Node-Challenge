@@ -33,8 +33,11 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+
+
 function onDataReceived(text) {
-  if(text === 'list\n'){
+
+  if (text === 'list\n'){
     list()
 
   }else if (text === 'quit\n') {
@@ -43,18 +46,14 @@ function onDataReceived(text) {
   }else if(text === 'exit\n'){
     quit();
 
-  }else if(text){
-    hello(text);
+  } 
+  else {
+    add(text)
+  }
 
-  }
-  else{
-    unknownCommand(text);
-    console.log('\nplease enter "help" to see the list of valid commands:\n');
-    if(text === 'help\n'){
-      help();
-  }
+
 }
-}
+
 
 
 /**
@@ -66,6 +65,38 @@ function onDataReceived(text) {
  */
 function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
+}
+
+
+/**
+ * This function for adding a task
+ * 
+ * 
+ */
+const tasks = [];
+function add (text) {
+
+  if(text.length > 1){
+  tasks.push(text.substring(4, text.length-1))
+  }else{
+    console.log('cannot add empty task')
+  }
+  return tasks;
+  }
+
+
+/**
+ * This function for listing all stored tasks
+ * 
+ * 
+ */
+
+function list () {
+
+  tasks.forEach((task, index) => {
+    console.log((index+1) + ' - [ ] ' + task)
+  });
+  
 }
 
 
@@ -86,10 +117,7 @@ function hello(text){
   }
 }
 
-function list () {
-  console.log('1 - [] buy bread\n')
-  console.log('2 - [] finish the task')
-}
+
 
 /**
  * This function is for listing the valid command for user to use it if enter invalid one
@@ -113,4 +141,5 @@ function quit(){
 
 // The following line starts the application
 startApp("Mohammad Harkous")
+
 
