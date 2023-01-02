@@ -1,3 +1,4 @@
+const fs = require("fs");
 
 /**
  * Starts the application
@@ -166,8 +167,6 @@ function check(index){
 return tasks
 }
 
-
-
 /**
  * Says hello
  * This function for printing any string with "!", and if there any an empty string it will return a default value "hello!"
@@ -203,8 +202,43 @@ function help(){
  * @returns {void}
  */
 function quit(){
+  let data = JSON.stringify(objList);
+  try {
+    fs.writeFileSync(savefile, data);
+    console.log(`data saved successfully`);
+  } catch (error) {
+    console.error(error);
+  }
   console.log('Quitting now, goodbye!')
   process.exit();
+}
+
+/**
+ * This function for saving data to the file
+ * 
+ * 
+ */
+let savefile;
+if (process.argv[2] == null) {
+  savefile = "database.json";
+} else {
+  savefile = process.argv[2];
+}
+
+var list1;
+
+try {
+  let data = fs.readFileSync(savefile);
+  var objList = JSON.parse(data);
+}
+catch (e) {
+  console.log(`The file is empty, enter data to save it`)
+}
+if (objList !== undefined) {
+  list1 = objList.list1;
+} else {
+  objList = { "list1": tasks}
+  list1 = objList.list1;
 }
 
 // The following line starts the application
